@@ -38,7 +38,7 @@ func (ev *event) ps() *process.Process {
 		return ev.proc
 	}
 
-	p, e := process.Pid(ev.pid)
+	p, e := process.Pid(int32(ev.pid))
 	ev.state = true
 	if e != nil {
 		xEnv.Infof("pid:%d ppid:%d event:%s got process fail %v", ev.pid, ev.ppid, ev.eTypeToString(), e)
@@ -72,9 +72,9 @@ func (ev *event) Proc() *process.Process {
 	var proc *process.Process
 	var err error
 	if ev.ppid == -1 {
-		proc, err = process.Pid(ev.pid)
+		proc, err = process.Pid(int32(ev.pid))
 	} else {
-		proc, err = process.Pid(ev.ppid)
+		proc, err = process.Pid(int32(ev.ppid))
 	}
 
 	if err != nil {

@@ -21,7 +21,7 @@ func (ev *event) Peek() lua.LValue                       { return ev }
 func (ev *event) ss(L *lua.LState) int {
 	of := ss.NewOptionFlagL(L, 1)
 	cnd := cond.CheckMany(L, cond.Seek(1))
-	L.Push(ss.ByPID(ev.pid, ss.Flag(of), ss.Cnd(cnd)))
+	L.Push(ss.ByPID(int32(ev.pid), ss.Flag(of), ss.Cnd(cnd)))
 	return 1
 }
 
@@ -56,7 +56,7 @@ func (ev *event) Index(L *lua.LState, key string) lua.LValue {
 
 	case "ps":
 		if ev.proc.IsNull() {
-			ev.proc, _ = process.Pid(ev.pid)
+			ev.proc, _ = process.Pid(int32(ev.pid))
 		}
 		return ev.proc
 

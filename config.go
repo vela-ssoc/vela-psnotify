@@ -15,7 +15,7 @@ type config struct {
 	name   string
 	Ignore *cond.Ignore
 	filter *cond.Combine
-	pipe   *pipe.Px
+	pipe   *pipe.Chains
 	vsh    *vswitch.Switch
 	co     *lua.LState
 	watch  *Watcher
